@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String and Array Problems</title>
+</head>
+
+<body>
+
+    <h1>Student Assignment 2</h1>
+
+    <h2>String and Array Problem-Solving</h2>
+
+    <p>JavaScript Assignment 2</p>
+
+    <script>
+
+
+        // Q1. Reverse a string without using reverse()
+
+        function reverseWord(input) {
+
+            let output = "";
+
+            for (let position = input.length - 1; position >= 0; position--) {
+
+                output = output + input[position];
+
+            }
+
+            return output;
+        }
+
+        console.log("Reverse String:", reverseWord("hello"));
+
+
+        // Q2. Check whether a string is palindrome
+
+        function verifyPalindrome(input) {
+
+            let word = input.toLowerCase();
+
+            let backwardWord = "";
+
+            for (let position = word.length - 1; position >= 0; position--) {
+
+                backwardWord = backwardWord + word[position];
+
+            }
+
+            if (word === backwardWord) {
+
+                return true;
+
+            }
+
+            else {
+
+                return false;
+
+            }
+
+        }
+
+        console.log("Palindrome:", verifyPalindrome("madam"));
+
+
+        // Q3. Count vowels and consonants
+
+        function calculateLetters(input) {
+
+            let totalVowels = 0;
+
+            let totalConsonants = 0;
+
+            let lowerText = input.toLowerCase();
+
+            for (let position = 0; position < lowerText.length; position++) {
+
+                let currentLetter = lowerText[position];
+
+                if (currentLetter >= "a" && currentLetter <= "z") {
+
+                    if (
+                        currentLetter === "a" ||
+                        currentLetter === "e" ||
+                        currentLetter === "i" ||
+                        currentLetter === "o" ||
+                        currentLetter === "u"
+                    ) {
+
+                        totalVowels++;
+
+                    }
+
+                    else {
+
+                        totalConsonants++;
+
+                    }
+
+                }
+
+            }
+
+            return {
+                vowels: totalVowels,
+                consonants: totalConsonants
+            };
+
+        }
+
+        console.log("Vowels and Consonants:",
+            calculateLetters("Hello World"));
+
+
+        // Q4. Find second largest distinct number
+
+        function findRunnerUp(list) {
+
+            let biggest = -Infinity;
+
+            let runnerUp = -Infinity;
+
+            for (let position = 0; position < list.length; position++) {
+
+                if (list[position] > biggest) {
+
+                    runnerUp = biggest;
+
+                    biggest = list[position];
+
+                }
+
+                else if (
+                    list[position] > runnerUp &&
+                    list[position] < biggest
+                ) {
+
+                    runnerUp = list[position];
+
+                }
+
+            }
+
+            if (runnerUp === -Infinity) {
+
+                return "Second largest number not found";
+
+            }
+
+            return runnerUp;
+
+        }
+
+        console.log("Second Largest:",
+            findRunnerUp([10, 5, 20, 8, 20]));
+
+
+        // Q5. Remove duplicate elements without Set
+
+        function filterRepeated(list) {
+
+            let finalList = [];
+
+            for (let position = 0; position < list.length; position++) {
+
+                let duplicate = false;
+
+                for (let check = 0; check < finalList.length; check++) {
+
+                    if (list[position] === finalList[check]) {
+
+                        duplicate = true;
+
+                        break;
+
+                    }
+
+                }
+
+                if (duplicate === false) {
+
+                    finalList.push(list[position]);
+
+                }
+
+            }
+
+            return finalList;
+
+        }
+
+        console.log("Remove Duplicates:",
+            filterRepeated([1, 2, 2, 3, 1]));
+
+
+        // Q6. Find sum of even numbers
+
+        function addEvenValues(list) {
+
+            let answer = 0;
+
+            for (let position = 0; position < list.length; position++) {
+
+                if (list[position] % 2 === 0) {
+
+                    answer = answer + list[position];
+
+                }
+
+            }
+
+            return answer;
+
+        }
+
+        console.log("Sum of Even Numbers:",
+            addEvenValues([1, 2, 3, 4, 5, 6]));
+
+
+        // Q7. Find frequency of a given element
+
+        function getOccurrence(list, searchValue) {
+
+            let totalCount = 0;
+
+            for (let position = 0; position < list.length; position++) {
+
+                if (list[position] === searchValue) {
+
+                    totalCount++;
+
+                }
+
+            }
+
+            return totalCount;
+
+        }
+
+        console.log("Element Frequency:",
+            getOccurrence([1, 2, 2, 3, 2, 4], 2));
+
+
+        // Q8. Check whether two strings are anagrams
+
+        function compareAnagram(wordOne, wordTwo) {
+
+            let firstText = wordOne.toLowerCase().replace(/\s/g, "");
+
+            let secondText = wordTwo.toLowerCase().replace(/\s/g, "");
+
+            if (firstText.length !== secondText.length) {
+
+                return false;
+
+            }
+
+            let characterList = [];
+
+            for (let position = 0; position < firstText.length; position++) {
+
+                let letter = firstText[position];
+
+                if (characterList[letter] === undefined) {
+
+                    characterList[letter] = 1;
+
+                }
+
+                else {
+
+                    characterList[letter]++;
+
+                }
+
+            }
+
+            for (let position = 0; position < secondText.length; position++) {
+
+                let letter = secondText[position];
+
+                if (
+                    characterList[letter] === undefined ||
+                    characterList[letter] === 0
+                ) {
+
+                    return false;
+
+                }
+
+                characterList[letter]--;
+
+            }
+
+            return true;
+
+        }
+
+        console.log("Anagram Check:",
+            compareAnagram("listen", "silent"));
+
+
+        // Q9. Move all zeros to the end of an array
+
+        function arrangeZeros(list) {
+
+            let newList = [];
+
+            let zeros = 0;
+
+            for (let position = 0; position < list.length; position++) {
+
+                if (list[position] === 0) {
+
+                    zeros++;
+
+                }
+
+                else {
+
+                    newList.push(list[position]);
+
+                }
+
+            }
+
+            for (let position = 0; position < zeros; position++) {
+
+                newList.push(0);
+
+            }
+
+            return newList;
+
+        }
+
+        console.log("Move Zeros:",
+            arrangeZeros([0, 1, 0, 3, 12]));
+
+
+    </script>
+
+</body>
+
+</html>
